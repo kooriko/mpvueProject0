@@ -5,7 +5,7 @@ export default new Promise(resolve => {
                 getUserInfo () {
                     return new Promise(resolve => {
                         wx.getUserInfo({
-                            success: res => {
+                            success (res) {
                                 resolve(res)
                             }
                         })

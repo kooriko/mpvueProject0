@@ -23,6 +23,7 @@
 
 <script>
 import card from '@/components/card'
+import wx from '@/libs/wx'
 
 export default {
   data () {
@@ -41,17 +42,10 @@ export default {
       const url = '../logs/main'
       wx.navigateTo({ url })
     },
-    getUserInfo () {
+    async getUserInfo () {
       // 调用登录接口
-      wx.login({
-        success: () => {
-          wx.getUserInfo({
-            success: (res) => {
-              this.userInfo = res.userInfo
-            }
-          })
-        }
-      })
+      const { userInfo } = await (await wx).getUserInfo()
+      this.userInfo = userInfo
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)

@@ -23,39 +23,39 @@
 
 <script>
 import card from '@/components/card'
-import wx from '@/libs/wx'
+import wxp from '@/libs/wxp'
 
 export default {
-  data () {
-    return {
-      motto: 'Hello World',
-      userInfo: {}
-    }
-  },
-
-  components: {
-    card
-  },
-
-  methods: {
-    bindViewTap () {
-      const url = '../logs/main'
-      wx.navigateTo({ url })
+    data () {
+        return {
+            motto: 'Hello World',
+            userInfo: {}
+        }
     },
-    async getUserInfo () {
-      // 调用登录接口
-      const { userInfo } = await (await wx).getUserInfo()
-      this.userInfo = userInfo
+
+    components: {
+        card
     },
-    clickHandle (msg, ev) {
-      console.log('clickHandle:', msg, ev)
-    }
+
+    methods: {
+        bindViewTap () {
+            const url = '../logs/main'
+            wx.navigateTo({ url })
+        },
+        async getUserInfo () {
+            // 调用登录接口
+            const { userInfo } = await (await wxp).getUserInfo()
+            this.userInfo = userInfo
+        },
+        clickHandle (msg, ev) {
+            console.log('clickHandle:', msg, ev)
+        }
   },
 
-  created () {
-    // 调用应用实例的方法获取全局数据
-    this.getUserInfo()
-  }
+    created () {
+        // 调用应用实例的方法获取全局数据
+        this.getUserInfo()
+    }
 }
 </script>
 

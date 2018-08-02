@@ -1,0 +1,43 @@
+.c-theme {
+    color: #F1453D;
+}
+.c-font {
+    color: #353535;
+}
+.bc-theme {
+    color: #D02930;
+}
+
+.f-small {
+    font-size: 26rpx;
+}
+.f-beauty {
+    font-size: 28rpx;
+}
+.f-normal {
+    font-size: 30rpx;
+}
+.f-large {
+    font-size: 35rpx;
+}
+
+body {
+    color: #353535;
+    font-size: 30rpx;
+}
+.btn {
+    @extend .bc-theme;
+    @extend .f-beauty;
+    padding: 10rpx 0;
+    border: 3rpx solid #D02930;
+    border-radius: 0;
+    background-color: #FFF;
+    &:hover {
+        background-color: #D02930;
+        color: #FFF;
+    }
+    &.type--primary {
+        background-color: #D02930;
+        color: #FFF;
+    }
+}

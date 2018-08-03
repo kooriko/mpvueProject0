@@ -4,10 +4,19 @@
 .c-font {
     color: #353535;
 }
+.c-secondary {
+    color: #A7A7A7;
+}
 .bc-theme {
     color: #D02930;
 }
+.c-desc {
+    color: #CCC;
+}
 
+.f-tiny {
+    font-size: 20rpx;
+}
 .f-small {
     font-size: 26rpx;
 }
@@ -19,6 +28,9 @@
 }
 .f-large {
     font-size: 35rpx;
+}
+.f-strong {
+    font-weight: 800;
 }
 
 body {

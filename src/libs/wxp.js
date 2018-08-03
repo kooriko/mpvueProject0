@@ -10,6 +10,18 @@ export default new Promise(resolve => {
                             }
                         })
                     })
+                },
+                request (url, params) {
+                    return new Promise(resolve => {
+                        wx.request({
+                            url,
+                            params,
+                            header: { 'Content-Type': 'application/json' },
+                            success (res) {
+                                resolve(res)
+                            }
+                        })
+                    })
                 }
             })
         }

@@ -15,7 +15,7 @@
 
 <script>
 import card from '@/components/card'
-import wxp from '@/libs/wxp'
+import pic from './img/pic0'
 
 const list = [
     {
@@ -40,12 +40,16 @@ export default {
     },
 
     methods: {
-        selectCollege () {
+        selectCollege (index) {
+            // this.$wx.request()
+            const img = pic
+
+            wx.navigateTo({ url: `../Detail/main?id=40&img=${ img }&name=水煮肉片&detail=辣味十足特别美味&price=30&order=60` })
 
         }
     },
-    created () {
-        // this.getUserInfo()
+    mounted () {
+        console.log(this.$wx)
     }
 }
 </script>
@@ -53,6 +57,7 @@ export default {
 <style lang="scss" scoped>
 $notice-height: 80rpx;
 $notice-bc: #FDF8D8;
+
 .notice {
     display: inline-block;
     position: relative;

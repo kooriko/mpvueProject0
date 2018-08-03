@@ -45,8 +45,8 @@ const comments = [
         id: 1,
         tel: 18500241855,
         avatar: 'https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/whfpf%3D180%2C140%2C50/sign=f8f8ea635dda81cb4eb3d08d345be12e/f11f3a292df5e0feccb38b96506034a85fdf72f9.jpg',
-        comment: '辣辣的！非常好吃！下次还买',
-        createTime: 1533218323379
+        comment: '感觉还挺不错的，味道很香，就是太他妈辣了，每次都说少加点🌶，就是他娘的不知道！？下次不来了！差评！',
+        createTime: 1533260769581
     },
 ]
 export default {

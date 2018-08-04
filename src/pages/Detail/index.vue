@@ -1,5 +1,5 @@
 <template>
-    <div class="dish-container">
+    <div class="dish-page-container">
         <div class="division">
             <div class="dish-img" :style="'background-image: url(' + dish.img + ')'"></div>
 
@@ -77,7 +77,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dish-container {
+.dish-page-container {
     background-color: #F4F4F4;
     .division {
         padding: 0 30rpx;

@@ -32,10 +32,6 @@ export default {
         clickHandle (msg, ev) {
             console.log('clickHandle:', msg, ev)
         }
-  },
-
-    created () {
-        this.getUserInfo()
     }
 }
 </script>

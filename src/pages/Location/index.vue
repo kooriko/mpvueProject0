@@ -43,8 +43,8 @@ export default {
         selectCollege (index) {
             // this.$wx.request()
             const img = pic
-
-            wx.navigateTo({ url: `../Detail/main?id=40&img=${ img }&name=水煮肉片&detail=辣味十足特别美味&price=30&order=60` })
+            wx.setStorageSync('location', this.list[index].name)
+            wx.navigateTo({ url: `../Home/main?id=40&img=${ img }&name=水煮肉片&detail=辣味十足特别美味&price=30&order=60` })
 
         }
     },

@@ -13,6 +13,9 @@
 .c-desc {
     color: #CCC;
 }
+.c-white {
+    color: white;
+}
 
 .f-tiny {
     font-size: 20rpx;
@@ -36,6 +39,7 @@
 body {
     color: #353535;
     font-size: 30rpx;
+    background: #F4F4F4;
 }
 .btn {
     @extend .c-price;
@@ -52,4 +56,13 @@ body {
         background-color: #D02930;
         color: #FFF;
     }
+}
+
+.text-ellipsis {
+    text-overflow: ellipsis;
+}
+
+.img {
+    background-position: 50%;
+    background-size: cover;
 }

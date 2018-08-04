@@ -1,5 +1,5 @@
 <template>
-    <div class="comment-container">
+    <div class="comment-component-container">
         <div class="comment-top">
             <div class="comment-top-left">
                 <div class="comment-avatar" :style="'background-image: url(' + comment.avatar + ')'"></div>
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.comment-container {
+.comment-component-container {
     display: flex;
     flex-direction: column;
     padding: 20rpx;

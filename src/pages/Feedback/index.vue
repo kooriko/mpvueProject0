@@ -16,9 +16,7 @@ export default {
         }
     },
 
-    components: {
-        card
-    },
+    components: { card },
 
     methods: {
         bindViewTap () {

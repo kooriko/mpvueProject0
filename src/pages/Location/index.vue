@@ -57,7 +57,9 @@ export default {
 <style lang="scss" scoped>
 $notice-height: 80rpx;
 $notice-bc: #FDF8D8;
-
+.location-container {
+    background: #FFF;
+}
 .notice {
     display: inline-block;
     position: relative;

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        Location Page
+        Cart Page
     </div>
 </template>
 

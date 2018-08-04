@@ -59,7 +59,11 @@ body {
 }
 
 .text-ellipsis {
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    height: 1.6em;
+    overflow: hidden;
 }
 
 .img {

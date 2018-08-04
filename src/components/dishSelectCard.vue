@@ -20,12 +20,12 @@
                     </span>
                 </span>
 
-                <span v-if="!quantity" class="dish-card-option">
+                <span v-if="!dish.quantity" class="dish-card-option">
                     <span class="quantity-button--plus c-white" @click="changeQuantity(1)">+</span>
                 </span>
-                <span v-else-if="quantity" class="dish-card-option">
+                <span v-else-if="dish.quantity" class="dish-card-option">
                     <span class="quantity-button--minus c-price" @click="changeQuantity(-1)">-</span>
-                    <span class="quantity">{{ quantity }}</span>
+                    <span class="quantity">{{ dish.quantity }}</span>
                     <span class="quantity-button--plus c-white" @click="changeQuantity(1)">+</span>
                 </span>
                 <span v-else class="dish-card-option is-select">选品类</span>
@@ -40,23 +40,13 @@ import store from '@/libs/store'
 export default {
     name: 'dishCard',
     props: {
-        dish: Object,
-    },
-    data () {
-        return {
-            quantity: 0
-        }
+        dish: Object
     },
     methods: {
         changeQuantity (num) {
-            this.quantity += num
-            let dishQuantity = store.get('dishQuantity') || {}
-            const dishId = this.dish.id
-            dishQuantity[dishId] = this.quantity
-
-            store.emit('dishQuantityChange', 'dishQuantity', dishQuantity)
+            this.$emit('quantityChange', num)
         }
-    }
+    },
 }
 </script>
 

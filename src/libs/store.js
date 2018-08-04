@@ -8,6 +8,9 @@ export default {
             fn(store[key])
         })
     },
+    set (key, value) {
+        store[key] = value
+    },
     get (key) {
         return store[key] || {}
     },

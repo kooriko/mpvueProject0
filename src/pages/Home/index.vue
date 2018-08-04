@@ -19,7 +19,8 @@
                 <dish-select-card
                     v-for="(dish, index) in dishList"
                     :key="index"
-                    :dish="dish"></dish-select-card>
+                    :dish="dish"
+                    @quantityChange="quantityChange(index, $event)"></dish-select-card>
             </div>
         </div>
         <div class="home-cart c-white" @click="toCartPage">
@@ -34,6 +35,7 @@ import card from '@/components/card'
 import dishSelectCard from '@/components/dishSelectCard'
 
 import store from '@/libs/store'
+import dishes from '@/libs/dishes'
 import wxp from '@/libs/wxp'
 
 const dishList = [
@@ -43,7 +45,8 @@ const dishList = [
         img: 'https://s1.st.meishij.net/r/106/232/3995606/s3995606_153276690671843.jpg',
         detail: '真香，且香而不腻',
         order: 88,
-        price: 23
+        price: 23,
+        quantity: 0
     },
     {
         id: 200,
@@ -51,7 +54,8 @@ const dishList = [
         img: 'https://s1.st.meishij.net/r/216/197/6174466/s6174466_153257066516315.jpg',
         detail: '无辣不欢的小伙伴们，夏天不要错过这道菜哦！开胃又下饭，比吃肉还过瘾',
         order: 120,
-        price: 16
+        price: 16,
+        quantity: 0
     },
     {
         id: 300,
@@ -59,7 +63,8 @@ const dishList = [
         img: 'http://images.meishij.net/p/20150108/83fdd6a11e1176b98de81595e979f2ce.jpg',
         detail: '鸡腿提前腌制过，好吃到停不下来！',
         order: 152,
-        price: 17
+        price: 17,
+        quantity: 0
     }
 ]
 
@@ -70,7 +75,7 @@ export default {
             locationTip: wx.getStorageSync('location'),
             activeIndex: 0,
             bannerImg: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533375012620&di=83436220cb8854f527c6495351d0ab3e&imgtype=0&src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2F00%2F04%2F27%2F49%2F80bb0f440cd934b893bbcf3e07bc096a.jpg',
-            dishList,
+            dishList: [],
             totalQuantity: 0
         }
     },
@@ -81,12 +86,23 @@ export default {
         toCartPage () {
             const url = '../Cart/main'
             wx.navigateTo({ url })
+        },
+        getDishes () {
+            this.dishList = dishList
+            dishes.push(dishList)
+        },
+        quantityChange (index, num) {
+            const dishList = JSON.parse(JSON.stringify(this.dishList))
+            dishList[index].quantity += num
+
+            store.set('dishList', dishList)
+
+            this.dishList = dishList
+            this.totalQuantity = dishList.reduce((total, curr) => total += curr.quantity, 0)
         }
     },
     mounted () {
-        store.subscribe('dishQuantityChange', dishQuantity => {
-            this.totalQuantity = Object.values(dishQuantity).reduce((total, quantity) => (total += quantity), 0)
-        })
+        this.getDishes()
     }
 }
 </script>

@@ -1,68 +1,50 @@
 <template>
-    <div class="container">
-        Cart Page
+    <div class="cart-page-container">
+        <div class="cart-dish-list">
+            <dish-select-card
+                v-for="(dish, index) in orderList"
+                :key="index"
+                :dish="dish.dish"
+                :defaultQuantity="dish.quantity"></dish-select-card>
+        </div>
     </div>
 </template>
 
 <script>
-import card from '@/components/card'
+import dishSelectCard from '@/components/dishSelectCard'
+
+import store from '@/libs/store'
+import dishes from '@/libs/dishes'
 import wxp from '@/libs/wxp'
 
 export default {
     data () {
         return {
-            motto: 'Hello World',
-            userInfo: {}
+            orderList: []
         }
     },
-
-    components: {
-        card
-    },
-
+    components: { dishSelectCard },
     methods: {
-        bindViewTap () {
-            const url = '../logs/main'
-            wx.navigateTo({ url })
-        },
-        async getUserInfo () {
-            const { userInfo } = await (await wxp).getUserInfo()
-            this.userInfo = userInfo
-        },
-        clickHandle (msg, ev) {
-            console.log('clickHandle:', msg, ev)
-        }
+    },
+
+    mounted () {
+        const dishQuantity = store.get('dishQuantity')
+        this.orderList = Object.entries(dishQuantity).map(item => {
+            console.log(item)
+            return {
+                dish: dishes.find(item[0]),
+                quantity: item[1]
+            }
+        })
+        console.log(this.orderList)
     }
 }
 </script>
 
 <style scoped>
-.userinfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.userinfo-avatar {
-    width: 128rpx;
-    height: 128rpx;
-    margin: 20rpx;
-    border-radius: 50%;
-}
-
-.userinfo-nickname {
-    color: #aaa;
-}
-
-.usermotto {
-    margin-top: 150px;
-}
-
-.form-control {
-    display: block;
-    padding: 0 12px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
+.cart-dish-list {
+    padding: 0 20rpx;
+    background-color: #FFF;
 }
 
 </style>

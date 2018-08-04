@@ -7,7 +7,7 @@
 .c-secondary {
     color: #A7A7A7;
 }
-.bc-theme {
+.c-price {
     color: #D02930;
 }
 .c-desc {
@@ -38,7 +38,7 @@ body {
     font-size: 30rpx;
 }
 .btn {
-    @extend .bc-theme;
+    @extend .c-price;
     @extend .f-beauty;
     padding: 10rpx 0;
     border: 3rpx solid #D02930;

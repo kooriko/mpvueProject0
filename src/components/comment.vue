@@ -17,16 +17,20 @@
                 :style="'background-image: url(' + pic + ')'">
             </div>
         </div>
+        <dish-card :dish="dish" :quantity="2"></dish-card>
     </div>
 </template>
 
 <script>
 import moment from '@/libs/moment'
+import dishCard from '@/components/dishCard'
 
 export default {
     props: {
-        comment: Object
+        comment: Object,
+        dish: Object
     },
+    components: { dishCard },
     computed: {
         formattedCreateTime () {
             return moment(this.comment.createTime).format(1)

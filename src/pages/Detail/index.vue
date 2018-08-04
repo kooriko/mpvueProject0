@@ -8,7 +8,7 @@
                 <span class="dish-desc f-tiny">{{ dish.detail }}</span>
                 <span class="dish-order f-tiny">月售{{ dish.order }}份</span>
                 <div class="dish-block">
-                    <span class="dish-price bc-theme f-large">￥{{ dish.price }}</span>
+                    <span class="dish-price c-price f-large">￥{{ dish.price }}</span>
                     <span class="btn-cart f-tiny">加入购物车</span>
                 </div>
             </div>
@@ -22,6 +22,7 @@
             <comment
                 v-for="(comment, index) in comments"
                 :comment="comment"
+                :dish="dish"
                 :key="index">
 
             </comment>

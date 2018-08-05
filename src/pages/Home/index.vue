@@ -17,6 +17,7 @@
             </div>
             <div class="dish-container">
                 <dish-select-card
+                    class="dish"
                     v-for="(dish, index) in dishList"
                     :key="index"
                     :dish="dish"
@@ -92,6 +93,9 @@ export default {
             wx.navigateTo({ url })
         },
         getDishes () {
+            dishList.forEach(item => {
+                item.isChecked = false
+            })
             this.dishList = dishList
             dishes.push(dishList)
         },

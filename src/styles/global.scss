@@ -17,6 +17,13 @@
     color: white;
 }
 
+.bg-black {
+    background-color: #333;
+}
+.bg-price {
+    color: #D02930;
+}
+
 .f-tiny {
     font-size: 20rpx;
 }
@@ -57,6 +64,34 @@ body {
         color: #FFF;
     }
 }
+.checkbox {
+    display: inline-block;
+    border: 3rpx solid #DCDCDC;
+    position: relative;
+    background-color: inherit;
+    border-radius: 50%;
+    width: 35rpx;
+    height: 35rpx;
+    color: #FFF;
+    &:after {
+        content: '✓';
+        position: absolute;
+        left: -3rpx; right: -3rpx; top: -3rpx; bottom: -3rpx;
+        background-color: #D02930;
+        text-align: center;
+        line-height: 35rpx;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: all .15s;
+        border: 3rpx solid #D02930;
+    }
+    &.type--is-checked {
+        &:after {
+            transform: scale(1);
+        }
+
+    }
+}
 
 .text-ellipsis {
     display: -webkit-box;
@@ -70,3 +105,4 @@ body {
     background-position: 50%;
     background-size: cover;
 }
+

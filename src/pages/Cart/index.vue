@@ -1,17 +1,50 @@
 <template>
-    <div class="cart-page-container">
-        <div class="cart-dish-list" v-if="orderList.length">
-            <dish-select-card
-                v-for="(dish, index) in orderList"
-                :key="index"
-                :dish="dish"
-                @quantityChange="quantityChange(dish.id, $event)"></dish-select-card>
+    <div class="cart-page-container" v-if="orderList.length">
+        <div class="division">
+             <div class="cart-dish-list">
+                 <div class="cart-dish-item" v-for="(dish, index) in orderList" :key="index">
+                    <div :class="['checkbox', 'cart-dish-checkbox', dish.isChecked ? 'type--is-checked' : '']" @click="dishSelect(dish.id)"/>
+                    <dish-select-card :dish="dish" @quantityChange="quantityChange(dish.id, $event)"></dish-select-card>
+                 </div>
+            </div>
+            <div class="extra-fee f-tiny c-secondary">
+                <div class="extra-fee-text">配送费</div>
+                <div class="extra-fee-fee">￥6</div>
+            </div>
         </div>
-        <div v-else class="cart-dish-list--no-order">
 
+        <div class="division menber-info">
+            <div class="menber-info-title">
+                成为尊贵的麦谷会员，可为您优惠10元。
+            </div>
+            <div class="menber-info-detail f-tiny c-secondary">
+                此处显示会员权益文案，烦请提炼关键卖点。
+            </div>
             <!-- <img src="" alt=""> -->
-            <div>天了个噜，购物车竟然是空的</div>
         </div>
+
+        <div class="cart-footer">
+            <div class="footer-left">
+                <span class="check-all" @click="() => { isCheckAll = !isCheckAll }">
+                    <span :class="['checkbox', isCheckAll ? 'type--is-checked' : '']"></span>
+                    <span class="check-all-text">全选</span>
+                </span>
+                <span class="total-price">
+                    <span class="total-price-text f-small">总价</span>
+                    <span class="price-mark f-tiny c-price">￥</span>
+                    <span class="price c-price">{{ totalPrice }}</span>
+                </span>
+            </div>
+
+            <div class="footer-right">
+                <div class="footer-right-option bg-black c-white">立即加入会员</div>
+                <div class="footer-right-option bg-price c-white">去结算</div>
+            </div>
+        </div>
+    </div>
+     <div v-else class="cart-page-container--no-order">
+        <!-- <img src="" alt=""> -->
+        <div>天了个噜，购物车竟然是空的</div>
     </div>
 </template>
 
@@ -32,6 +65,17 @@ export default {
     computed: {
         orderList () {
             return this.dishList.filter(dish => dish.quantity)
+        },
+        isCheckAll: {
+            get () {
+                return this.orderList.every(dish => dish.isChecked)
+            },
+            set (flag) {
+                this.orderList.map(dish => dish.id).forEach(dishId => this.dishList.find(dish => dish.id === dishId).isChecked = flag)
+            }
+        },
+        totalPrice () {
+            return this.orderList.reduce((totalPrice, dish) => totalPrice += dish.price * dish.quantity, 0)
         }
     },
     methods: {
@@ -41,9 +85,12 @@ export default {
 
             store.set('dishList', dishList)
             this.dishList = dishList
+        },
+        dishSelect (dishId) {
+            const dish = this.dishList.find(dish => dish.id === dishId)
+            dish.isChecked = !dish.isChecked
         }
     },
-
     onShow () {
         this.dishList = store.get('dishList')
     }
@@ -51,13 +98,57 @@ export default {
 </script>
 
 <style lang="scss">
+.cart-page-container--no-order {
+    text-align: center;
+}
 .cart-dish-list {
-    padding: 0 20rpx;
     background-color: #FFF;
+    margin-bottom: 30rpx;
 
-    &--no-order {
-        text-align: center;
+    .cart-dish-item {
+        display: flex;
+        align-items: center;
+
+        .cart-dish-checkbox {
+            flex-shrink: 0;
+            margin-right: 20rpx;
+        }
     }
 }
+.division {
+    padding: 30rpx;
+    background-color: #FFF;
+    margin-bottom: 30rpx;
+}
+.extra-fee {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30rpx;
 
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0; right: 0; top: 0;
+        height: 1rpx;
+        background-color: #DCDCDC;
+    }
+}
+.cart-footer {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background-color: #FFF;
+    padding: 30rpx 0;
+    .check-all {
+        margin-right: 20rpx;
+        .check-all-text {
+            margin-left: 20rpx;
+        }
+    }
+    .footer-right-option  {
+        width: 50%;
+    }
+}
 </style>

@@ -54,12 +54,11 @@ export default {
 .dish-card-container {
     position: relative;
     display: flex;
+    flex-grow: 1;
     box-shadow: 6rpx 6rpx 16rpx rgba(0, 0, 0, .16);
     border-radius: 6rpx;
-
-    &:not(:last-child) {
-        margin-bottom: 20rpx;
-    }
+    overflow: hidden;
+    margin-bottom: 20rpx;
 
     .dish-card-img {
         width: 170rpx;

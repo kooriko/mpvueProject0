@@ -12,7 +12,7 @@ export default {
         store[key] = value
     },
     get (key) {
-        return store[key] || {}
+        return store[key]
     },
     subscribe (key, fn) {
         actions[key] ? actions[key].push(fn) : (actions[key] = [fn])

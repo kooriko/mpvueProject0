@@ -20,7 +20,7 @@
                     v-for="(dish, index) in dishList"
                     :key="index"
                     :dish="dish"
-                    @quantityChange="quantityChange(index, $event)"></dish-select-card>
+                    @quantityChange="quantityChange(dish.id, $event)"></dish-select-card>
             </div>
         </div>
         <div class="home-cart c-white" @click="toCartPage">
@@ -75,8 +75,12 @@ export default {
             locationTip: wx.getStorageSync('location'),
             activeIndex: 0,
             bannerImg: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533375012620&di=83436220cb8854f527c6495351d0ab3e&imgtype=0&src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2F00%2F04%2F27%2F49%2F80bb0f440cd934b893bbcf3e07bc096a.jpg',
-            dishList: [],
-            totalQuantity: 0
+            dishList: []
+        }
+    },
+    computed: {
+        totalQuantity () {
+            return this.dishList.reduce((total, curr) => total += curr.quantity, 0)
         }
     },
     methods: {
@@ -91,18 +95,23 @@ export default {
             this.dishList = dishList
             dishes.push(dishList)
         },
-        quantityChange (index, num) {
+        quantityChange (dishId, num) {
             const dishList = JSON.parse(JSON.stringify(this.dishList))
-            dishList[index].quantity += num
+            dishList.find(dish => dish.id === dishId).quantity += num
 
             store.set('dishList', dishList)
 
             this.dishList = dishList
-            this.totalQuantity = dishList.reduce((total, curr) => total += curr.quantity, 0)
         }
     },
-    mounted () {
-        this.getDishes()
+    onShow () {
+        const dishList = store.get('dishList')
+
+        if (!dishList) {
+            this.getDishes()
+        } else {
+            this.dishList = dishList
+        }
     }
 }
 </script>

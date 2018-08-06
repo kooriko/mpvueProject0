@@ -1,6 +1,6 @@
 <template>
     <div class="dish-card-container">
-        <div class="dish-card-img" :style="'background-image: url(' + dish.img + ')'"></div>
+        <div class="dish-card-img" @click="toDetailPage()" :style="'background-image: url(' + dish.img + ')'"></div>
         <div class="dish-card-right">
             <div class="dish-card-top">
                 <div class="dish-card-title">{{ dish.name }}</div>
@@ -43,6 +43,9 @@ export default {
         dish: Object
     },
     methods: {
+        toDetailPage () {
+            wx.navigatorTo({ url: `../Detail/main?dish=${ dish }` })
+        },
         changeQuantity (num) {
             this.$emit('quantityChange', num)
         }

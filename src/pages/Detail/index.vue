@@ -59,10 +59,10 @@ export default {
     },
     methods: {
         async getDish () {
-            const dishId = this.$root.$mp.query.id
+            // const dishId = this.$root.$mp.query.id
             // const dish = await this.$wx.request({})
             // console.log(result)
-            this.dish = this.$root.$mp.query
+            this.dish = this.$root.$mp.query.dish
         }
     },
     computed: {

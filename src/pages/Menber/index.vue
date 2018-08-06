@@ -12,6 +12,7 @@ import wxp from '@/libs/wxp'
 export default {
     data () {
         return {
+            step: 0
         }
     },
 

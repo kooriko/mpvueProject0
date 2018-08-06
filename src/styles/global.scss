@@ -23,6 +23,9 @@
 .bg-price {
     background-color: #D02930;
 }
+.bg-white {
+    background-color: #FFF;
+}
 
 .f-tiny {
     font-size: 20rpx;
@@ -101,9 +104,10 @@ body {
     overflow: hidden;
 }
 
-.img {
-    background-position: 50%;
+.bg-image {
+    background-position: 50% 50%;
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .input-placeholder {

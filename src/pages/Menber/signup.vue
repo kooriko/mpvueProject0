@@ -1,5 +1,5 @@
 <template>
-    <div class="sign-up-page-container">
+    <div class="sign-up-page-container" v-if="!step">
         <div class="division">
             <div class="field">
                 <div class="field-left">姓名</div>
@@ -46,9 +46,28 @@
 
         <button class="btn type--primary next-btn" @click="next">下一步</button>
     </div>
+    <div class="sign-up-page-container" v-else>
+        <div class="menber-card" :style="'background-image: url(' + cardImage + ')'">
+            <div class="menber-header">
+                <div class="menber-avatar" :style="'background-image: url(' + userInfo.avatarUrl + ')'"></div>
+                <div class="menber-name">{{ userInfo.nickName }}</div>
+            </div>
+            <span class="menber-footer"></span>
+        </div>
+        <div class="footer bg-white">
+            <div class="total-price">
+                <span class="f-large total-price-text">总价</span>
+                <span class="f-small c-price">￥</span>
+                <span class="f-large c-price">99</span>
+            </div>
+            <div class="footer-right c-white bg-price">确认支付</div>
+        </div>
+    </div>
 </template>
 
 <script>
+import cardImage from '@/images/menber-card@3x.png'
+
 export default {
     data () {
         return {
@@ -60,7 +79,15 @@ export default {
                 birthday: '',
                 tel: '',
                 verification: ''
+            },
+            userInfo: {
+                avatar: 'https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/whfpf%3D180%2C140%2C50/sign=f8f8ea635dda81cb4eb3d08d345be12e/f11f3a292df5e0feccb38b96506034a85fdf72f9.jpg'
             }
+        }
+    },
+    computed: {
+        cardImage () {
+            return cardImage
         }
     },
     methods: {
@@ -70,8 +97,11 @@ export default {
         next () {
             this.step++
         }
+    },
+    async mounted () {
+        this.userInfo = (await this.$wx.getUserInfo()).userInfo
+        console.log(this.userInfo)
     }
-
 }
 </script>
 
@@ -119,5 +149,50 @@ input {
     margin-top: 60rpx;
     width: 90%;
     border-radius: 60rpx;
+}
+
+.menber-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50rpx;
+    box-sizing: border-box;
+    width: 90vw;
+    height: 31.5vh;
+    margin: 0 auto;
+    border-radius: 10rpx;
+    color: #FFF;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    .menber-header {
+        display: flex;
+        align-items: center;
+
+        .menber-avatar {
+            width: 85rpx;
+            height: 85rpx;
+            border-radius: 50%;
+            margin-right: 20rpx;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            background-size: cover;
+        }
+    }
+}
+.footer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30rpx;
+
+    .footer-right {
+        padding: 30rpx;
+    }
+    .total-price {
+        display: flex;
+        align-items: center;
+    }
 }
 </style>

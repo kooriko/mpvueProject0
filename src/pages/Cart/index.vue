@@ -30,9 +30,9 @@
                     <span class="check-all-text">全选</span>
                 </span>
                 <span class="total-price">
-                    <span class="total-price-text f-small">总价</span>
+                    <span class="total-price-text f-large">总价</span>
                     <span class="price-mark f-tiny c-price">￥</span>
-                    <span class="price c-price">{{ totalPrice }}</span>
+                    <span class="price c-price f-large">{{ totalPrice }}</span>
                 </span>
             </div>
 
@@ -140,15 +140,37 @@ export default {
     position: fixed;
     bottom: 0; left: 0; right: 0;
     background-color: #FFF;
-    padding: 30rpx 0;
-    .check-all {
-        margin-right: 20rpx;
-        .check-all-text {
+
+    .footer-left {
+        display: flex;
+        padding: 30rpx;
+        align-items: center;
+        .check-all {
+            margin-right: 20rpx;
+            display: inline-flex;
+            align-items: center;
+
+            .check-all-text {
+                margin-left: 20rpx;
+            }
+        }
+        .total-price {
             margin-left: 20rpx;
+            display: inline-flex;
+            align-items: center;
         }
     }
-    .footer-right-option  {
-        width: 50%;
+
+    .footer-right {
+        display: flex;
+        align-items: stretch;
+        flex-grow: 1;
+        .footer-right-option  {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }
 </style>

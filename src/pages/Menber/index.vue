@@ -1,37 +1,23 @@
 <template>
     <div class="container">
-        Location Page
+        <signUpView />
     </div>
 </template>
 
 <script>
 import card from '@/components/card'
+import signUpView from './signup.vue'
 import wxp from '@/libs/wxp'
 
 export default {
     data () {
         return {
-            motto: 'Hello World',
-            userInfo: {}
         }
     },
 
-    components: {
-        card
-    },
+    components: { signUpView },
 
     methods: {
-        bindViewTap () {
-            const url = '../logs/main'
-            wx.navigateTo({ url })
-        },
-        async getUserInfo () {
-            const { userInfo } = await (await wxp).getUserInfo()
-            this.userInfo = userInfo
-        },
-        clickHandle (msg, ev) {
-            console.log('clickHandle:', msg, ev)
-        }
     },
 }
 </script>

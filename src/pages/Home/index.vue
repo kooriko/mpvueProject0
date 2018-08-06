@@ -17,7 +17,6 @@
             </div>
             <div class="dish-container">
                 <dish-select-card
-                    class="dish"
                     v-for="(dish, index) in dishList"
                     :key="index"
                     :dish="dish"

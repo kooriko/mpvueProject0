@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        Location Page
+        Me Page
     </div>
 </template>
 

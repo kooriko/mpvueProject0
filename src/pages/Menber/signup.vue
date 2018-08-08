@@ -116,30 +116,9 @@ input {
         background-color: #FFF;
     }
 }
-.field {
-    position: relative;
-    padding: 0 20rpx;
-    display: flex;
-    align-items: center;
-    &:after {
-        content: '';
-        position: absolute;
-        left: 0; right: 0; bottom: 0;
-        height: 3rpx;
-        background-color: #EEE;
-    }
-    .field-left {
-        width: 200rpx;
-    }
-    .filed-right {
-        flex-grow: 1;
-        display: flex;
-        align-items: stretch;
-        border: none;
-    }
-}
+
 .get-verification-btn {
-    border-left: 1px solid #DCDCDC;
+    border-left: 1px solid #EEE;
     display: flex;
     align-items: center;
     padding-left: 20rpx;

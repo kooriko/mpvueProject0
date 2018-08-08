@@ -1,68 +1,66 @@
 <template>
-    <div class="container">
-        Location Page
+    <div class="address-page-container">
+        <address-item v-for="(addressItem, index) in addressList" :key="index" :address="addressItem"></address-item>
+        <div class="address-plus">
+            <div class="icon"></div>
+            <span class="address-plus-text" @click="addAddress">新增收货地址</span>
+        </div>
     </div>
 </template>
 
 <script>
-import card from '@/components/card'
-import wxp from '@/libs/wxp'
+import addressItem from '@/components/address'
 
+const addressList = [
+    {
+        id: 1004,
+        name: '韩娜',
+        tel: 15101008791,
+        address: '呼伦贝尔学院宿舍楼 八号楼 606 室'
+    },
+    {
+        id: 1005,
+        name: '淘小宝',
+        tel: 136277910881,
+        address: '呼伦贝尔学院宿舍楼 六号楼 710 室'
+    }
+]
 export default {
     data () {
         return {
-            motto: 'Hello World',
-            userInfo: {}
+            addressList: [],
+
         }
     },
-
-    components: {
-        card
-    },
-
+    components: { addressItem },
     methods: {
-        bindViewTap () {
-            const url = '../logs/main'
-            wx.navigateTo({ url })
+        async getAddressList () {
+            const addressList = wx.getStorageSync('addresses')
+            this.addressList = addressList
         },
-        async getUserInfo () {
-            const { userInfo } = await (await wxp).getUserInfo()
-            this.userInfo = userInfo
-        },
-        clickHandle (msg, ev) {
-            console.log('clickHandle:', msg, ev)
+        addAddress () {
+            wx.redirectTo({ url: '../AddressEdit/main' })
         }
     },
+    mounted () {
+        // wx.setStorageSync('addresses', addressList)
+        this.getAddressList()
+    }
 }
 </script>
 
 <style scoped>
-.userinfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.address-page-container {
+    background-color: #FFF;
 }
-
-.userinfo-avatar {
-    width: 128rpx;
-    height: 128rpx;
-    margin: 20rpx;
-    border-radius: 50%;
+.address-plus {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    text-align: center;
+    padding: 20rpx;
+    background-color: #FFF;
 }
+.address-plus-text {
 
-.userinfo-nickname {
-    color: #aaa;
 }
-
-.usermotto {
-    margin-top: 150px;
-}
-
-.form-control {
-    display: block;
-    padding: 0 12px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-}
-
 </style>

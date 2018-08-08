@@ -14,6 +14,9 @@ export default {
     get (key) {
         return store[key]
     },
+    remove (key) {
+        store[key] = ''
+    },
     subscribe (key, fn) {
         actions[key] ? actions[key].push(fn) : (actions[key] = [fn])
     },

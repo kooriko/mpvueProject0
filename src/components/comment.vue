@@ -17,7 +17,7 @@
                 :style="'background-image: url(' + pic + ')'">
             </div>
         </div>
-        <dish-card :dish="dish" :quantity="2"></dish-card>
+        <dish-card :dish="dish"></dish-card>
     </div>
 </template>
 

@@ -30,9 +30,6 @@
 </template>
 
 <script>
-import card from '@/components/card'
-import wxp from '@/libs/wxp'
-
 export default {
     data () {
         return {

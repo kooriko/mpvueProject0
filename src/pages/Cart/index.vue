@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-     <div v-else class="cart-page-container--no-order">
+     <div v-else class="cart-page-container--no-data">
         <!-- <img src="" alt=""> -->
         <div>天了个噜，购物车竟然是空的</div>
     </div>
@@ -98,7 +98,7 @@ export default {
 </script>
 
 <style lang="scss">
-.cart-page-container--no-order {
+.cart-page-container--no-data {
     text-align: center;
 }
 .cart-dish-list {

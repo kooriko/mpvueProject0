@@ -4,7 +4,7 @@
         <div class="dish-card-right">
             <div class="dish-card-top">
                 <div class="dish-card-title">{{ dish.name }}</div>
-                <div class="dish-card-order-quantity f-beauty">x{{ quantity }}</div>
+                <div class="dish-card-order-quantity f-beauty">x{{ dish.quantity }}</div>
             </div>
             <div class="dish-card-detail f-tiny">{{ dish.detail }}</div>
             <div class="dish-card-foot">
@@ -15,7 +15,7 @@
                     ￥
                 </span>
                 <span class="f-large c-price">
-                    {{ dish.price * quantity }}
+                    {{ dish.price * dish.quantity }}
                 </span>
             </div>
         </div>
@@ -27,7 +27,6 @@ export default {
     name: 'dishCard',
     props: {
         dish: Object,
-        quantity: Number
     },
 
 }

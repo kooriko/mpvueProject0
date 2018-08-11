@@ -20,12 +20,24 @@
             </div>
         </div>
         <button class="btn type--primary save-btn" @click="saveAddress">保存地址</button>
-        <button class="btn save-btn" @click="removeAddress" v-if="status === 'edit'">删除地址</button>
+        <button class="btn save-btn" @click="() => { isShow = true }" v-if="status === 'edit'">删除地址</button>
+
+        <div :class="[ 'dialog', isShow ? 'is-show' : '' ]" @click="() => { isShow = false }">
+            <div class="dialog-title">
+                确定要删除该地址
+            </div>
+            <button class="dialog-button c-price mb-20" @click="removeAddress">
+                删除
+            </button>
+            <button class="dialog-button">
+                取消
+            </button>
+        </div>
     </div>
 </template>
 
 <script>
-import card from '@/components/card'
+import dialog from '@/components/dialog'
 import store from '@/libs/store'
 
 export default {
@@ -37,9 +49,11 @@ export default {
                 tel: '',
                 id: ''
             },
-            status: 'new'
+            status: 'new',
+            isShow: false
         }
     },
+    components: { dialog },
     methods: {
         saveAddress () {
             const addresses = wx.getStorageSync('addresses')
@@ -60,7 +74,6 @@ export default {
             addresses.splice(index, 1)
             wx.setStorageSync('addresses', addresses)
             wx.redirectTo({ url: '../Address/main' })
-
         }
     },
     mounted () {
@@ -77,7 +90,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .address-page-container {
     background: #FFF;
     border-top: 1px solid #DCDCDC;
@@ -91,4 +104,27 @@ export default {
     margin: 30rpx 20rpx;
 }
 
+.dialog {
+    position: fixed;
+    z-index: 20;
+    bottom: 0; left: 0; right: 0;
+    text-align: center;
+    background-color: #F6F6F9;
+    transition: all .3s;
+    transform: translateY(100%);
+
+    &.is-show {
+        transform: translateY(0);
+
+        &:after {
+            content: '';
+            position: fixed;
+            top: -9999px; left: 0; bottom: 100%; right: 0;
+            background-color: rgba(0, 0, 0, .3);
+        }
+    }
+    .dialog-title {
+        padding: 20rpx;
+    }
+}
 </style>

@@ -45,6 +45,9 @@
         </div>
 
         <button class="btn type--primary next-btn" @click="next">下一步</button>
+        <div :class="['message', 'c-white', isShow ? 'is-show' : '' ]" @transitionend="TransitionEndHandle">
+            {{ message }}
+        </div>
     </div>
     <div class="sign-up-page-container" v-else>
         <div class="menber-card" :style="'background-image: url(' + cardImage + ')'">
@@ -63,6 +66,7 @@
             <div class="footer-right c-white bg-price">确认支付</div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -80,9 +84,9 @@ export default {
                 tel: '',
                 verification: ''
             },
-            userInfo: {
-                avatar: 'https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/whfpf%3D180%2C140%2C50/sign=f8f8ea635dda81cb4eb3d08d345be12e/f11f3a292df5e0feccb38b96506034a85fdf72f9.jpg'
-            }
+            userInfo: {},
+            message: '',
+            isShow: false
         }
     },
     computed: {
@@ -95,8 +99,25 @@ export default {
             console.log(this.form.tel)
         },
         next () {
-            this.step++
-        }
+            const { status, message } = this.validate()
+            if (!status) {
+                this.isShow = true
+                this.message = message
+            } else {
+                this.step++
+            }
+        },
+        async validate () {
+            if (!(/^\d{13}$/.test(form.tel))) {
+                return {
+                    status: false,
+                    message: '请输入正确的手机号'
+                }
+            }
+            // if () {
+
+            // }
+        },
     },
     async mounted () {
         this.userInfo = (await this.$wx.getUserInfo()).userInfo
@@ -129,7 +150,23 @@ input {
     width: 90%;
     border-radius: 60rpx;
 }
-
+.message {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300rpx; height: 300rpx;
+    border-radius: 50rpx;
+    background-color: rgba(0, 0, 0, .3);
+    opacity: 0;
+    transition: all .3s;
+    &.is-show {
+        opacity: 1;
+    }
+}
 .menber-card {
     display: flex;
     flex-direction: column;

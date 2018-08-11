@@ -1,22 +1,22 @@
 <template>
     <div class="container">
-        <signUpView />
+        <signUpView v-if="!status" />
+        <signInView v-else />
     </div>
 </template>
 
 <script>
-import card from '@/components/card'
 import signUpView from './signup.vue'
-import wxp from '@/libs/wxp'
+import signInView from './signin.vue'
 
 export default {
     data () {
         return {
-            step: 0
+            status: 1
         }
     },
 
-    components: { signUpView },
+    components: { signUpView, signInView },
 
     methods: {
     },

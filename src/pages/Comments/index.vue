@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        Location Page
+        Comments Page
     </div>
 </template>
 
@@ -21,17 +21,6 @@ export default {
     },
 
     methods: {
-        bindViewTap () {
-            const url = '../logs/main'
-            wx.navigateTo({ url })
-        },
-        async getUserInfo () {
-            const { userInfo } = await (await wxp).getUserInfo()
-            this.userInfo = userInfo
-        },
-        clickHandle (msg, ev) {
-            console.log('clickHandle:', msg, ev)
-        }
     },
 }
 </script>

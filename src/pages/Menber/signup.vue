@@ -33,7 +33,9 @@
                 <div class="field-left">手机号码</div>
                 <div class="filed-right">
                     <input type="text" v-model="form.tel" placeholder="请填写手机号码">
-                    <div class="get-verification-btn" @click="sendVerification">获取验证码</div>
+                    <div class="get-verification-btn" @click="sendVerification">
+                        {{ countDown ? countDown + '秒后重发' : verificated ? '重发' : '获取验证码' }}
+                    </div>
                 </div>
             </div>
              <div class="field">
@@ -86,7 +88,9 @@ export default {
             },
             userInfo: {},
             message: '',
-            isShow: false
+            isShow: false,
+            verificated: false,
+            countDown: 0
         }
     },
     computed: {
@@ -96,7 +100,16 @@ export default {
     },
     methods: {
         sendVerification () {
-            console.log(this.form.tel)
+            if (this.countDown) return
+
+            this.countDown = 10
+            this.verificated = true
+            const interval = setInterval(() => {
+                this.countDown--
+                if (!this.countDown) {
+                    clearInterval(interval)
+                }
+            }, 1000)
         },
         next () {
             const { status, message } = this.validate()
